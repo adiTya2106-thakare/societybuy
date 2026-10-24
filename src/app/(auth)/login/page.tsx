@@ -22,6 +22,7 @@ export default function LoginPage() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<LoginInput>({ resolver: zodResolver(loginSchema) });
 
@@ -97,15 +98,54 @@ export default function LoginPage() {
             {errors.password && <p className="text-xs text-red-500">{errors.password.message}</p>}
           </div>
 
-          <Button type="submit" className="w-full" loading={loading}>
-            Login
+          <Button type="submit" className="w-full bg-[#166534] hover:bg-[#14532D] text-white font-bold rounded-xl py-3 text-sm shadow-md" loading={loading}>
+            Login to Your Society Account
           </Button>
         </form>
 
-        <div className="mt-4 text-center text-sm">
+        {/* Demo Fast Login Chips */}
+        <div className="mt-6 pt-5 border-t border-slate-100">
+          <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2.5 text-center">
+            Demo Test Accounts (Click to Fill)
+          </p>
+          <div className="grid grid-cols-3 gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                setValue("email", "resident1@example.com");
+                setValue("password", "Resident@1234");
+              }}
+              className="p-2 rounded-xl border border-emerald-200 bg-emerald-50/70 hover:bg-emerald-100/70 text-[11px] font-bold text-emerald-900 transition-colors text-center"
+            >
+              🏢 Resident
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setValue("email", "merchant@greenfield.in");
+                setValue("password", "Merchant@1234");
+              }}
+              className="p-2 rounded-xl border border-amber-200 bg-amber-50/70 hover:bg-amber-100/70 text-[11px] font-bold text-amber-900 transition-colors text-center"
+            >
+              🏪 Merchant
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setValue("email", "admin@societybuy.in");
+                setValue("password", "Admin@1234");
+              }}
+              className="p-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-[11px] font-bold text-slate-800 transition-colors text-center"
+            >
+              🛡️ Admin
+            </button>
+          </div>
+        </div>
+
+        <div className="mt-4 text-center text-xs">
           <span className="text-gray-500">Don&apos;t have an account? </span>
-          <Link href="/register" className="text-green-600 font-medium hover:underline">
-            Create one free
+          <Link href="/register" className="text-emerald-700 font-bold hover:underline">
+            Register your apartment flat
           </Link>
         </div>
       </CardContent>
